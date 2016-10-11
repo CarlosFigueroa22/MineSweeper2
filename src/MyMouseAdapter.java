@@ -90,15 +90,22 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
 			
-			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
+			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) 
+			{
 				//Had pressed outside
 				//Do nothing
-			} else {
-				if ((gridX == -1) || (gridY == -1)) {
+			} 
+			else 
+			{
+				if ((gridX == -1) || (gridY == -1)) 
+				{
 					//Is releasing outside
 					//Do nothing
-				} else {
-					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
+				} 
+				else
+				{
+					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) 
+					{
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					}
