@@ -24,6 +24,7 @@ public class MyPanel extends JPanel {
 	public static int mineCount = 10; //Number of mines
 	public int squareCountAvailable = (TOTAL_COLUMNS-1)*(TOTAL_COLUMNS-1) - mineCount;
 
+	public GridSquare[][] Squares = new GridSquare[TOTAL_COLUMNS][TOTAL_ROWS];
 	
 //	//Used to display the numbers inside squares
 //	public int[][] closeMines= new int[TOTAL_COLUMNS + 1][TOTAL_ROWS + 1];
@@ -43,6 +44,7 @@ public class MyPanel extends JPanel {
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //Grid 9x9
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorCoveredSquare[x][y] = Color.WHITE;
+				Squares[x][y] = new GridSquare(x, y);
 			}
 		}
 	}
@@ -146,6 +148,37 @@ public class MyPanel extends JPanel {
 			return -1;
 		}
 		return y;
+	}
+	
+	public void generateMines()
+	{
+		Random randX = new Random();
+		Random randY = new Random();
+		int generatedMines = 0;
+		while (generatedMines < mineCount)
+		{
+			int x = randX.nextInt(9);
+			int y = randY.nextInt(9);
+			if (!Squares[x][y].isMine())
+			{
+				Squares[x][y].setMine(true);
+				generatedMines++;
+			}
+		}
+	}
+	
+	public void revealAllMines()
+	{
+		for (int x = 0; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y = 0; y < TOTAL_ROWS; y++) 
+			{
+				if(Squares[x][y].isMine())
+				{
+					colorCoveredSquare[x][y] = Color.BLACK;
+				}
+			}
+		}
 	}
 }	
 
