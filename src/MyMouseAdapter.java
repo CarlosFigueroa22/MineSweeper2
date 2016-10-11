@@ -90,15 +90,22 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
 			
-			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
+			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) 
+			{
 				//Had pressed outside
 				//Do nothing
-			} else {
-				if ((gridX == -1) || (gridY == -1)) {
+			} 
+			else 
+			{
+				if ((gridX == -1) || (gridY == -1)) 
+				{
 					//Is releasing outside
 					//Do nothing
-				} else {
-					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
+				} 
+				else
+				{
+					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) 
+					{
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					}
@@ -145,11 +152,20 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridX2 = myPanel2.getGridX(x3, y3);
 			int gridY2 = myPanel2.getGridY(x3, y3);
 			
-			if(gridX2 >= 0 && gridX2 <= 9 && gridY2 >= 0 && gridY2 <= 9) {
-            		myPanel2.colorCoveredSquare[gridX2][gridY2] = Color.RED;
-	            	myPanel2.repaint();
-	            	myPanel2.repaint();
-        			}
+			if(gridX2 >= 0 && gridX2 <= 9 && gridY2 >= 0 && gridY2 <= 9) 
+			{   //Checks if square is NOT red
+				if(!myPanel2.colorCoveredSquare[gridX2][gridY2].equals(Color.RED))
+				{
+					myPanel2.colorCoveredSquare[gridX2][gridY2] = Color.RED;
+					myPanel2.repaint();
+				}
+				//Toggle RED off
+				else if(myPanel2.colorCoveredSquare[gridX2][gridY2].equals(Color.RED))
+				{
+					myPanel2.colorCoveredSquare[gridX2][gridY2] = Color.WHITE;
+					myPanel2.repaint();
+				}
+        	}
 
 			break;
 			
