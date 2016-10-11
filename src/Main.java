@@ -8,11 +8,20 @@ public class Main {
 		myFrame.setSize(400, 400);
 
 		MyPanel myPanel = new MyPanel();
+		
+		//TESTING NEW METHODS, DELETE LATER
+		myPanel.generateMines();
+		myPanel.revealAllMines();
+		// END OF TEST
+		
 		myFrame.add(myPanel);
+		
 
 		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		myFrame.addMouseListener(myMouseAdapter);
 
 		myFrame.setVisible(true);
+		
+		
 	}
 }
