@@ -208,6 +208,32 @@ public class MyPanel extends JPanel {
 			}
 		}
 	}
+	
+	public void revealAllNumbers()
+	{
+		for (int x = 0; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y = 0; y < TOTAL_ROWS; y++) 
+			{
+				if(!Squares[x][y].isMine() && Squares[x][y].getNearbyMines() > 0)
+				{
+					Color color = Color.WHITE;
+					switch(Squares[x][y].getNearbyMines())
+					{
+						case 1: color = Color.BLUE; break;
+						case 2: color = Color.CYAN; break;
+						case 3: color = Color.GREEN; break;
+						case 4: color = Color.GRAY; break;
+						case 5: color = Color.MAGENTA; break;
+						case 6: color = Color.ORANGE; break;
+						case 7: color = Color.PINK; break;
+						case 8: color = Color.YELLOW; break;
+					}
+					colorCoveredSquare[x][y] = color;
+				}
+			}
+		}
+	}
 }	
 
 //  //IDEAS (ERRORS AT THE MOMENT)
