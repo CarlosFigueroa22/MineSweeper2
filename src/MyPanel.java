@@ -16,8 +16,6 @@ public class MyPanel extends JPanel {
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	
-//	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public Color[][] colorCoveredSquare = new Color[TOTAL_COLUMNS][TOTAL_ROWS+1];  //Add 1 to avoid an error
 	public Color[][] colorUncoveredSquare = new Color[TOTAL_COLUMNS][TOTAL_ROWS];  //Will determine if the square is a mine or not
 	
@@ -26,9 +24,7 @@ public class MyPanel extends JPanel {
 
 	public GridSquare[][] Squares = new GridSquare[TOTAL_COLUMNS][TOTAL_ROWS];
 	
-//	//Used to display the numbers inside squares
-//	public int[][] closeMines= new int[TOTAL_COLUMNS + 1][TOTAL_ROWS + 1];
-//	public String[][] squareCount = new String[TOTAL_COLUMNS + 1][TOTAL_ROWS + 1];
+
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		
@@ -86,17 +82,6 @@ public class MyPanel extends JPanel {
 				}
 			}
 		}
-		
-//		//Displays the numbers
-//		for (int x=1; x<TOTAL_COLUMNS;x++)
-//		{
-//			for (int y=1; y<TOTAL_ROWS-1; y++)
-//			{
-//				g.setColor(Color.GREEN);
-//				g.drawString(squareCount[x][y], GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
-//			}
-//		}
-	
 	}
 	
 	public int getGridX(int x, int y) {
@@ -235,97 +220,3 @@ public class MyPanel extends JPanel {
 		}
 	}
 }	
-
-//  //IDEAS (ERRORS AT THE MOMENT)
-//	public void displayAdjacentSquares(int x, int y)
-//	{ 
-//		for (int a = -1; a<=1; a++)
-//		{
-//			for (int b = -1; b<=1; b++)
-//			{
-//				if (colorCoveredSquare[x + a][y + b].equals(Color.RED))
-//				{
-//					//If the square has a flag(RED)
-//					//Do nothing
-//				}
-//				else if (x + a < 1 || y + b < 1 || x + a == TOTAL_COLUMNS || y + b == TOTAL_COLUMNS || x==TOTAL_COLUMNS || y==TOTAL_COLUMNS || x < 1 || y < 1)
-//				{
-//					//If it is outside the grid
-//					//Do nothing
-//				}
-//				else if (b==0 && a==0)
-//				{
-//					//Do nothing
-//	
-//				}			
-//				else if (colorCoveredSquare[x + a][y + b].equals(colorUncoveredSquare[x + a][y + b]))
-//				{
-//					//If the square is already light gray
-//					//Do nothing
-//				}
-//				else if (closeMines[x + a][y + b] != 0)
-//				{
-//					//If the square has mines around it
-//					squareCount[x + a][y + b] = String.valueOf(closeMines[x + a][y + b]);
-//					squareCountAvailable--;
-//					colorCoveredSquare[x + a][y + b] = colorUncoveredSquare[x + a][y + b];
-//				}
-//				else
-//				{
-//					//If the square doesn't have mines around
-//					squareCountAvailable--;
-//					colorCoveredSquare[x + a][y + b] = colorUncoveredSquare[x + a][y + b];
-//					displayAdjacentSquares(x + a, y + b);	
-//				}				
-//			}
-//		}
-//	}
-//	
-//	public void randomMineLocation(int x, int y)
-//	{
-//		//FreeSquare is the first square you click, there shouldn't be a mine
-//		Boolean[][] freeSquare = new Boolean[TOTAL_COLUMNS+1][TOTAL_ROWS+1];
-//
-//		//asign all values to false
-//		for (int a = 0; a<=TOTAL_COLUMNS; a++)
-//		{
-//			for (int b = 0; b<=TOTAL_ROWS; b++)
-//			{
-//				freeSquare[a][b] = false;
-//			}
-//		}
-//		for (int a = -1; a<=1; a++)
-//		{     
-//			for (int b = -1; b<=1; b++)
-//			{
-//				freeSquare[x + a][y + b] = true;
-//			}
-//		}
-//
-//
-//		Random random = new Random();    
-//		for(int a = 1 ; a <= mineCount; a++)
-//		{ 
-//			//Assigns the squares that are mines (X and Y are random)
-//			int X = random.nextInt(TOTAL_COLUMNS) + 1; //Add 1 so the x can never be 0 and will be 9
-//			int Y = random.nextInt(TOTAL_COLUMNS) + 1;
-//
-//			if (colorUncoveredSquare[X][Y] == Color.BLACK)
-//				a--;
-//			else if (freeSquare[X][Y])
-//				a--;
-//			else
-//			{
-//				colorUncoveredSquare[X][Y] = Color.BLACK;
-//
-//				for (int b = -1; b<=1; b++)
-//				{
-//					for (int c = -1; c<=1; c++)
-//					{
-//						this.closeMines[X + b][Y + c]++;
-//					}
-//				}
-//			}
-//		}
-//	}
-//}
