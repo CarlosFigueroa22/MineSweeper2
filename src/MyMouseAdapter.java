@@ -120,12 +120,12 @@ public class MyMouseAdapter extends MouseAdapter {
 						//On the left column and on the top row... do nothing
 					}
 										
-//					//If the square has mines around it, display the number of adjacent mines (JUST AN IDEA)
+					//If the square has mines around it, display the number of adjacent mines (JUST AN IDEA)
 //					if (myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != 0)
 //					{
 //						myPanel.squareCount[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = String.valueOf(myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY]);
 //					}
-										
+//										
 				}
 			}
 			myPanel.repaint();

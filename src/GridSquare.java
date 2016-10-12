@@ -3,6 +3,7 @@ public class GridSquare
 {
 	int xPos;
 	int yPos;
+	int display;
 	int nearbyMines = 0;
 	boolean Mine;
 	boolean Visible;
@@ -54,6 +55,5 @@ public class GridSquare
 	{
 		this.Visible = value;
 	}
-	
-	
+		
 }

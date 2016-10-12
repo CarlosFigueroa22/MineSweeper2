@@ -28,7 +28,7 @@ public class MyPanel extends JPanel {
 	
 //	//Used to display the numbers inside squares
 //	public int[][] closeMines= new int[TOTAL_COLUMNS + 1][TOTAL_ROWS + 1];
-//	public String[][] squareCount = new String[TOTAL_COLUMNS + 1][TOTAL_ROWS + 1];
+	public String[][] squareCount = new String[TOTAL_COLUMNS + 1][TOTAL_ROWS + 1];
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		
@@ -87,15 +87,15 @@ public class MyPanel extends JPanel {
 			}
 		}
 		
-//		//Displays the numbers
-//		for (int x=1; x<TOTAL_COLUMNS;x++)
-//		{
-//			for (int y=1; y<TOTAL_ROWS-1; y++)
-//			{
-//				g.setColor(Color.GREEN);
-//				g.drawString(squareCount[x][y], GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
-//			}
-//		}
+		//Displays the number of surrounding mines on a square
+		for (int x=1; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y=1; y < TOTAL_ROWS-1; y++)
+			{
+				g.setColor(Color.GREEN);
+				g.drawString(Integer.toString(Squares[x][y].nearbyMines), GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
+			}
+		}
 	
 	}
 	
@@ -180,7 +180,7 @@ public class MyPanel extends JPanel {
 			}
 		}
 	}
-}	
+	
 
 //  //IDEAS (ERRORS AT THE MOMENT)
 //	public void displayAdjacentSquares(int x, int y)
@@ -204,9 +204,9 @@ public class MyPanel extends JPanel {
 //					//Do nothing
 //	
 //				}			
-//				else if (colorCoveredSquare[x + a][y + b].equals(colorUncoveredSquare[x + a][y + b]))
+//				else if (colorCoveredSquare[x + a][y + b].equals(colorUncoveredSquare[x + a][y + b])) //.equals(Color.LIGHT_GRAY)
 //				{
-//					//If the square is already light gray
+//					//If the square is light gray
 //					//Do nothing
 //				}
 //				else if (closeMines[x + a][y + b] != 0)
@@ -226,29 +226,29 @@ public class MyPanel extends JPanel {
 //			}
 //		}
 //	}
-//	
-//	public void randomMineLocation(int x, int y)
-//	{
-//		//FreeSquare is the first square you click, there shouldn't be a mine
-//		Boolean[][] freeSquare = new Boolean[TOTAL_COLUMNS+1][TOTAL_ROWS+1];
-//
-//		//asign all values to false
-//		for (int a = 0; a<=TOTAL_COLUMNS; a++)
-//		{
-//			for (int b = 0; b<=TOTAL_ROWS; b++)
-//			{
-//				freeSquare[a][b] = false;
-//			}
-//		}
-//		for (int a = -1; a<=1; a++)
-//		{     
-//			for (int b = -1; b<=1; b++)
-//			{
-//				freeSquare[x + a][y + b] = true;
-//			}
-//		}
-//
-//
+	
+	public void randomMineLocation(int x, int y)
+	{
+		//FreeSquare is the first square you click, there shouldn't be a mine
+		Boolean[][] freeSquare = new Boolean[TOTAL_COLUMNS+1][TOTAL_ROWS+1];
+
+		//Assign all values to false
+		for (int a = 0; a<=TOTAL_COLUMNS; a++)
+		{
+			for (int b = 0; b<=TOTAL_ROWS; b++)
+			{
+				freeSquare[a][b] = false;
+			}
+		}
+		for (int a = -1; a<=1; a++)
+		{     
+			for (int b = -1; b<=1; b++)
+			{
+				freeSquare[x + a][y + b] = true;
+			}
+		}
+
+
 //		Random random = new Random();    
 //		for(int a = 1 ; a <= mineCount; a++)
 //		{ 
@@ -273,5 +273,5 @@ public class MyPanel extends JPanel {
 //				}
 //			}
 //		}
-//	}
-//}
+	}
+}
