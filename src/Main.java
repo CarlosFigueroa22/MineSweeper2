@@ -9,13 +9,10 @@ public class Main {
 
 		MyPanel myPanel = new MyPanel();
 		
-		myPanel.generateMines();
 		//TESTING NEW METHODS, DELETE LATER
+		myPanel.generateMines();
 		myPanel.revealAllMines();
 		// END OF TEST
-		myPanel.generateNumbers();
-		myPanel.revealAllNumbers();
-		
 		
 		myFrame.add(myPanel);
 		
