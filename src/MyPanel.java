@@ -17,6 +17,7 @@ public class MyPanel extends JPanel {
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
 	
+//	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public Color[][] colorCoveredSquare = new Color[TOTAL_COLUMNS][TOTAL_ROWS+1];  //Add 1 to avoid an error
 	public Color[][] colorUncoveredSquare = new Color[TOTAL_COLUMNS][TOTAL_ROWS];  //Will determine if the square is a mine or not
 	

@@ -154,7 +154,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			
 			if(gridX2 >= 0 && gridX2 <= 9 && gridY2 >= 0 && gridY2 <= 9) 
 			{   //Checks if square is NOT red
-				if(!myPanel2.colorCoveredSquare[gridX2][gridY2].equals(Color.RED))
+				if(!myPanel2.colorCoveredSquare[gridX2][gridY2].equals(Color.RED) && !myPanel2.Squares[gridX2][gridY2].isVisible())
 				{
 					myPanel2.colorCoveredSquare[gridX2][gridY2] = Color.RED;
 					myPanel2.repaint();
