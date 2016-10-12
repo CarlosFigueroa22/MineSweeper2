@@ -13,6 +13,7 @@ public class Main {
 		myPanel.generateMines();
 		myPanel.revealAllMines();
 		// END OF TEST
+		myPanel.generateNumbers();
 		
 		myFrame.add(myPanel);
 		

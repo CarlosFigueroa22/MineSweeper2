@@ -1,13 +1,11 @@
 
 public class GridSquare
 {
-	int xPos;
-	int yPos;
-	int nearbyMines = 0;
-	boolean Mine;
-	boolean Visible;
-	
-	
+	private int xPos;
+	private int yPos;
+	private int nearbyMines = 0;
+	private boolean Mine;
+	private boolean Visible = false;
 	
 	GridSquare(int x, int y)
 	{
@@ -23,6 +21,11 @@ public class GridSquare
 	public int getYPos()
 	{
 		return this.yPos;
+	}
+	
+	public int getNearbyMines()
+	{
+		return this.nearbyMines;
 	}
 	
 	public void setXPos(int x)
@@ -51,9 +54,13 @@ public class GridSquare
 	}
 	
 	public void setVisible(boolean value)
+
 	{
 		this.Visible = value;
+	}	
+	
+	public void bumpMines()
+	{
+			this.nearbyMines += 1;
 	}
-	
-	
 }
