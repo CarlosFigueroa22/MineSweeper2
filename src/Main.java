@@ -6,23 +6,13 @@ public class Main {
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
 		myFrame.setSize(400, 400);
-
-		MyPanel myPanel = new MyPanel();
-		
+		MyPanel myPanel = new MyPanel();	
 		myPanel.generateMines();
+		//myPanel.revealAllMines(); // Method for testing the game
 		myPanel.generateNumbers();
-		//TESTING NEW METHODS, DELETE LATER
-		//myPanel.revealAllMines();
-		// END OF TEST
-
 		myFrame.add(myPanel);
-		
-
 		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		myFrame.addMouseListener(myMouseAdapter);
-
 		myFrame.setVisible(true);
-		
-		
 	}
 }
