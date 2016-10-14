@@ -73,7 +73,7 @@ public class GridSquare
 			case 1: color = Color.BLUE; break;
 			case 2: color = Color.CYAN; break;
 			case 3: color = Color.GREEN; break;
-			case 4: color = Color.GRAY; break;
+			case 4: color = Color.RED; break;
 			case 5: color = Color.MAGENTA; break;
 			case 6: color = Color.ORANGE; break;
 			case 7: color = Color.PINK; break;

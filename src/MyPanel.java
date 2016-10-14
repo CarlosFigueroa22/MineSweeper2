@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
@@ -24,6 +25,9 @@ public class MyPanel extends JPanel {
 
 	public GridSquare[][] Squares = new GridSquare[TOTAL_COLUMNS][TOTAL_ROWS];
 	public boolean revealAllNumbers = false;
+	public boolean gameOver = false;
+	public int revealedSquares;
+	public boolean won = false;
 	
 
 	
@@ -83,6 +87,54 @@ public class MyPanel extends JPanel {
 				}
 			}
 		}
+		Font arial = new Font("Arial", Font.BOLD, 20);
+		g.setFont(arial);
+		
+		if(revealedSquares == (81 - mineCount))
+		{
+			win(g);
+			repaint();
+		}
+		
+		if(gameOver == true)
+		{
+			revealAllNumbers = true;
+			revealAllMines();
+			lose(g);
+			repaint();
+		}
+		
+		for (int x = 0; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y = 0; y < TOTAL_ROWS - 1; y++)
+			{
+				if(Squares[x][y].isVisible() && Squares[x][y].getNearbyMines() > 0)
+				{
+					revealNumbers(g, x, y);
+					repaint();
+				}
+				
+				else if(Squares[x][y].isVisible() && Squares[x][y].getNearbyMines() <= 0 && !Squares[x][y].isMine())
+				{
+					if (x!=0)
+					{
+						if(y!=8){Squares[x - 1][y + 1].setVisible(true); colorCoveredSquare[x - 1][y + 1] = Color.GRAY;}
+						if(y!=0){Squares[x - 1][y - 1].setVisible(true); colorCoveredSquare[x - 1][y - 1] = Color.GRAY;}
+						Squares[x - 1][y].setVisible(true); colorCoveredSquare[x - 1][y] = Color.GRAY;
+					}
+					if(x!=8)
+					{
+						if(y!=8){Squares[x + 1][y + 1].setVisible(true); colorCoveredSquare[x + 1][y + 1] = Color.GRAY;}
+						if(y!=0){Squares[x + 1][y - 1].setVisible(true); colorCoveredSquare[x + 1][y - 1] = Color.GRAY;}
+						Squares[x + 1][y].setVisible(true); colorCoveredSquare[x + 1][y] = Color.GRAY;
+					}
+					if(y!=8){Squares[x][y + 1].setVisible(true); colorCoveredSquare[x][y + 1] = Color.GRAY;}
+					if(y!=0){Squares[x][y - 1].setVisible(true); colorCoveredSquare[x][y - 1] = Color.GRAY;}
+				}
+			}
+		}	
+		
+		
 		if (revealAllNumbers)
 		{
 			revealAllNumbers(g);
@@ -92,10 +144,22 @@ public class MyPanel extends JPanel {
 		{
 			for (int y = 0; y < TOTAL_ROWS - 1; y++)
 			{
-				if(Squares[x][y].isVisible() && !Squares[x][y].isMine())
+				if(Squares[x][y].isVisible() && !Squares[x][y].isMine() && Squares[x][y].getNearbyMines() > 0)
 				{
 					g.setColor(Squares[x][y].getNumberColor());
 					g.drawString(Integer.toString(Squares[x][y].getNearbyMines()), GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
+				}
+			}
+		}
+		
+		revealedSquares = 0;
+		for (int x = 0; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y = 0; y < TOTAL_ROWS - 1; y++)
+			{
+				if(Squares[x][y].isVisible() && !Squares[x][y].isMine())
+				{
+					revealedSquares += 1;
 				}
 			}
 		}
@@ -224,5 +288,25 @@ public class MyPanel extends JPanel {
 				}
 			}
 		}
+	}
+	
+	public void revealNumbers(Graphics g, int xPos, int yPos)
+	{
+		g.setColor(Squares[xPos][yPos].getNumberColor());
+		g.drawString(Integer.toString(Squares[xPos][yPos].getNearbyMines()), GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
+		return;
+	}
+	
+	public void lose(Graphics g)
+	{
+			g.setColor(Color.RED);
+			g.drawString("GAME OVER!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
+	}
+	
+	public void win(Graphics g)
+	{
+			g.setColor(Color.GREEN);
+			g.drawString("YOU WIN!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
+			repaint();
 	}
 }	
