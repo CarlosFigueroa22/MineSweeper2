@@ -113,6 +113,24 @@ public class MyPanel extends JPanel {
 					revealNumbers(g, x, y);
 					repaint();
 				}
+				
+				else if(Squares[x][y].isVisible() && Squares[x][y].getNearbyMines() <= 0 && !Squares[x][y].isMine())
+				{
+					if (x!=0)
+					{
+						if(y!=8){Squares[x - 1][y + 1].setVisible(true); colorCoveredSquare[x - 1][y + 1] = Color.GRAY;}
+						if(y!=0){Squares[x - 1][y - 1].setVisible(true); colorCoveredSquare[x - 1][y - 1] = Color.GRAY;}
+						Squares[x - 1][y].setVisible(true); colorCoveredSquare[x - 1][y] = Color.GRAY;
+					}
+					if(x!=8)
+					{
+						if(y!=8){Squares[x + 1][y + 1].setVisible(true); colorCoveredSquare[x + 1][y + 1] = Color.GRAY;}
+						if(y!=0){Squares[x + 1][y - 1].setVisible(true); colorCoveredSquare[x + 1][y - 1] = Color.GRAY;}
+						Squares[x + 1][y].setVisible(true); colorCoveredSquare[x + 1][y] = Color.GRAY;
+					}
+					if(y!=8){Squares[x][y + 1].setVisible(true); colorCoveredSquare[x][y + 1] = Color.GRAY;}
+					if(y!=0){Squares[x][y - 1].setVisible(true); colorCoveredSquare[x][y - 1] = Color.GRAY;}
+				}
 			}
 		}	
 		
