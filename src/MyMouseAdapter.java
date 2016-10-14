@@ -116,18 +116,28 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Do nothing
 					}
 					
-					if(gridX >= 0 && gridX <= 9 && gridY >= 0 && gridY <= 8) {
-						//On the left column and on the top row... do nothing
-					}
-										
+					if(gridX >= 0 && gridX <= 9 && gridY >= 0 && gridY <= 9)
+					{
+						if(!myPanel.colorCoveredSquare[gridX][gridY].equals(Color.GRAY) && !myPanel.Squares[gridX][gridY].isVisible())
+						{
+							myPanel.colorCoveredSquare[gridX][gridY] = Color.GRAY;
+							myPanel.repaint();
+						}
+//						if(myPanel.colorCoveredSquare[gridX][gridY].equals(Color.BLACK))
+//						{
+//							myPanel.colorCoveredSquare[gridX][gridY] = myPanel.winOrLose(g);;
+//						}
+//										
 //					//If the square has mines around it, display the number of adjacent mines (JUST AN IDEA)
 //					if (myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != 0)
 //					{
 //						myPanel.squareCount[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = String.valueOf(myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY]);
 //					}
-										
+						
+					}
 				}
 			}
+	
 			myPanel.repaint();
 			break;
 			

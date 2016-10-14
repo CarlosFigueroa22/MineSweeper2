@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
@@ -224,5 +225,26 @@ public class MyPanel extends JPanel {
 				}
 			}
 		}
+	}
+	
+	public void winOrLose(Graphics g)
+	{
+		if(Squares[x][y].isMine())
+		{
+			g.setColor(Color.RED);
+			Font arial = new Font("Arial", Font.BOLD, 20);
+			g.setFont(arial);
+			g.drawString("GAME OVER!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
+		}
+//		else
+//		{
+//			if(Squares[x][y]) //Not finished
+//			{
+//				g.setColor(Color.RED);
+//				Font arial = new Font("Arial", Font.BOLD, 20);
+//				g.setFont(arial);
+//				g.drawString("CONGRATULATIONS, YOU WIN!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
+//			}
+//		}
 	}
 }	
