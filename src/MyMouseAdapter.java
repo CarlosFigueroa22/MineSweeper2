@@ -94,7 +94,6 @@ public class MyMouseAdapter extends MouseAdapter {
 			
 			Color newColor = null;
 			
-			
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) 
 			{
 				//Had pressed outside
@@ -126,6 +125,7 @@ public class MyMouseAdapter extends MouseAdapter {
 					{
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
+						return;
 					}
 					
 					if (myPanel.colorCoveredSquare[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))
@@ -134,28 +134,10 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Do nothing
 					}
 					
-//					if(!myPanel.Squares[gridX][gridY].isMine() && myPanel.Squares[gridX][gridY].getNearbyMines() > 0)
-//					{
-//						myPanel.revealAllNumbers = true;
-//						myPanel.repaint();
-//					}
-//					else
-//					{
-//						myPanel.revealAllNumbers = false;
-//					}
-					
-//					if(gridX >= 0 && gridX <= 9 && gridY >= 0 && gridY <= 9)
-//					{
-//						if(!myPanel.colorCoveredSquare[gridX][gridY].equals(Color.GRAY) && !myPanel.Squares[gridX][gridY].isVisible())
-//						{
-//							myPanel.colorCoveredSquare[gridX][gridY] = Color.GRAY;
-//							myPanel.repaint();
-//						}
-					
 					if (!myPanel.Squares[myPanel.mouseDownGridX][myPanel.mouseDownGridY].isVisible()) 
 					{
 						Color wColor = Color.WHITE;
-						myPanel.Squares[gridX][gridY].setVisible(true);
+						myPanel.Squares[myPanel.mouseDownGridX][myPanel.mouseDownGridY].setVisible(true);
 
 						do {
 							newColor = Color.GRAY;
@@ -166,20 +148,6 @@ public class MyMouseAdapter extends MouseAdapter {
 						myPanel.repaint();
 					
 					}
-					
-						
-//						if(myPanel.colorCoveredSquare[gridX][gridY].equals(Color.BLACK))
-//						{
-//							myPanel.colorCoveredSquare[gridX][gridY] = myPanel.winOrLose(g);;
-//						}
-//										
-//					//If the square has mines around it, display the number of adjacent mines (JUST AN IDEA)
-//					if (myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != 0)
-//					{
-//						myPanel.squareCount[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = String.valueOf(myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY]);
-//					}
-						
-					//}
 				}
 			}
 	
