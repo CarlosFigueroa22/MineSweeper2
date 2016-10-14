@@ -12,7 +12,7 @@ public class Main {
 		myPanel.generateMines();
 		myPanel.generateNumbers();
 		//TESTING NEW METHODS, DELETE LATER
-		myPanel.revealAllMines();
+		//myPanel.revealAllMines();
 		// END OF TEST
 
 		myFrame.add(myPanel);

@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 
 public class MyMouseAdapter extends MouseAdapter {
 	
-//	private Random generator = new Random();
+	public boolean gameOver = false;
+	public boolean win = false;
 	
 	
 	public void mousePressed(MouseEvent e) {
@@ -67,6 +68,7 @@ public class MyMouseAdapter extends MouseAdapter {
 		}
 	}
 	public void mouseReleased(MouseEvent e) {
+		if (gameOver == false || win == false){
 		switch (e.getButton()) {
 		
 		case 1:		//Left mouse button
@@ -90,6 +92,9 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
 			
+			Color newColor = null;
+			
+			
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) 
 			{
 				//Had pressed outside
@@ -102,8 +107,21 @@ public class MyMouseAdapter extends MouseAdapter {
 					//Is releasing outside
 					//Do nothing
 				} 
+				
 				else
 				{
+					if(myPanel.Squares[myPanel.mouseDownGridX][myPanel.mouseDownGridY].isMine())
+					{
+						gameOver = true;
+						myPanel.gameOver = true;
+						myPanel.repaint();
+					}
+					
+					if(myPanel.won)
+					{
+						win = true;
+					}
+					
 					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) 
 					{
 						//Released the mouse button on a different cell where it was pressed
@@ -116,13 +134,40 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Do nothing
 					}
 					
-					if(gridX >= 0 && gridX <= 9 && gridY >= 0 && gridY <= 9)
+//					if(!myPanel.Squares[gridX][gridY].isMine() && myPanel.Squares[gridX][gridY].getNearbyMines() > 0)
+//					{
+//						myPanel.revealAllNumbers = true;
+//						myPanel.repaint();
+//					}
+//					else
+//					{
+//						myPanel.revealAllNumbers = false;
+//					}
+					
+//					if(gridX >= 0 && gridX <= 9 && gridY >= 0 && gridY <= 9)
+//					{
+//						if(!myPanel.colorCoveredSquare[gridX][gridY].equals(Color.GRAY) && !myPanel.Squares[gridX][gridY].isVisible())
+//						{
+//							myPanel.colorCoveredSquare[gridX][gridY] = Color.GRAY;
+//							myPanel.repaint();
+//						}
+					
+					if (!myPanel.Squares[myPanel.mouseDownGridX][myPanel.mouseDownGridY].isVisible()) 
 					{
-						if(!myPanel.colorCoveredSquare[gridX][gridY].equals(Color.GRAY) && !myPanel.Squares[gridX][gridY].isVisible())
-						{
-							myPanel.colorCoveredSquare[gridX][gridY] = Color.GRAY;
-							myPanel.repaint();
-						}
+						Color wColor = Color.WHITE;
+						myPanel.Squares[gridX][gridY].setVisible(true);
+
+						do {
+							newColor = Color.GRAY;
+						} while ((newColor.equals(wColor)));
+
+						myPanel.colorCoveredSquare[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+						
+						myPanel.repaint();
+					
+					}
+					
+						
 //						if(myPanel.colorCoveredSquare[gridX][gridY].equals(Color.BLACK))
 //						{
 //							myPanel.colorCoveredSquare[gridX][gridY] = myPanel.winOrLose(g);;
@@ -134,7 +179,7 @@ public class MyMouseAdapter extends MouseAdapter {
 //						myPanel.squareCount[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = String.valueOf(myPanel.closeMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY]);
 //					}
 						
-					}
+					//}
 				}
 			}
 	
@@ -162,12 +207,15 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridX2 = myPanel2.getGridX(x3, y3);
 			int gridY2 = myPanel2.getGridY(x3, y3);
 			
-			if(gridX2 >= 0 && gridX2 <= 9 && gridY2 >= 0 && gridY2 <= 9) 
+			if(gridX2 >= 0 && gridX2 <= 9 && gridY2 >= 0 && gridY2 <= 9 && !myPanel2.Squares[gridX2][gridY2].isVisible()) 
 			{   //Checks if square is NOT red
 				if(!myPanel2.colorCoveredSquare[gridX2][gridY2].equals(Color.RED) && !myPanel2.Squares[gridX2][gridY2].isVisible())
 				{
+					if (!myPanel2.colorCoveredSquare[myPanel2.mouseDownGridX][myPanel2.mouseDownGridY].equals(Color.GRAY))
+					{
 					myPanel2.colorCoveredSquare[gridX2][gridY2] = Color.RED;
 					myPanel2.repaint();
+					}
 				}
 				//Toggle RED off
 				else if(myPanel2.colorCoveredSquare[gridX2][gridY2].equals(Color.RED))
@@ -184,5 +232,5 @@ public class MyMouseAdapter extends MouseAdapter {
 			break;
 			}
 
-		}
+		}}
 }

@@ -25,6 +25,9 @@ public class MyPanel extends JPanel {
 
 	public GridSquare[][] Squares = new GridSquare[TOTAL_COLUMNS][TOTAL_ROWS];
 	public boolean revealAllNumbers = false;
+	public boolean gameOver = false;
+	public int revealedSquares;
+	public boolean won = false;
 	
 
 	
@@ -84,6 +87,36 @@ public class MyPanel extends JPanel {
 				}
 			}
 		}
+		Font arial = new Font("Arial", Font.BOLD, 20);
+		g.setFont(arial);
+		
+		if(revealedSquares == (81 - mineCount))
+		{
+			win(g);
+			repaint();
+		}
+		
+		if(gameOver == true)
+		{
+			revealAllNumbers = true;
+			revealAllMines();
+			lose(g);
+			repaint();
+		}
+		
+		for (int x = 0; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y = 0; y < TOTAL_ROWS - 1; y++)
+			{
+				if(Squares[x][y].isVisible() && Squares[x][y].getNearbyMines() > 0)
+				{
+					revealNumbers(g, x, y);
+					repaint();
+				}
+			}
+		}	
+		
+		
 		if (revealAllNumbers)
 		{
 			revealAllNumbers(g);
@@ -93,10 +126,22 @@ public class MyPanel extends JPanel {
 		{
 			for (int y = 0; y < TOTAL_ROWS - 1; y++)
 			{
-				if(Squares[x][y].isVisible() && !Squares[x][y].isMine())
+				if(Squares[x][y].isVisible() && !Squares[x][y].isMine() && Squares[x][y].getNearbyMines() > 0)
 				{
 					g.setColor(Squares[x][y].getNumberColor());
 					g.drawString(Integer.toString(Squares[x][y].getNearbyMines()), GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
+				}
+			}
+		}
+		
+		revealedSquares = 0;
+		for (int x = 0; x < TOTAL_COLUMNS; x++)
+		{
+			for (int y = 0; y < TOTAL_ROWS - 1; y++)
+			{
+				if(Squares[x][y].isVisible() && !Squares[x][y].isMine())
+				{
+					revealedSquares += 1;
 				}
 			}
 		}
@@ -227,24 +272,23 @@ public class MyPanel extends JPanel {
 		}
 	}
 	
-	public void winOrLose(Graphics g)
+	public void revealNumbers(Graphics g, int xPos, int yPos)
 	{
-		if(Squares[x][y].isMine())
-		{
+		g.setColor(Squares[xPos][yPos].getNumberColor());
+		g.drawString(Integer.toString(Squares[xPos][yPos].getNearbyMines()), GRID_X + x*(INNER_CELL_SIZE+1) + 10, GRID_Y + y*(INNER_CELL_SIZE+1) + 20);
+		return;
+	}
+	
+	public void lose(Graphics g)
+	{
 			g.setColor(Color.RED);
-			Font arial = new Font("Arial", Font.BOLD, 20);
-			g.setFont(arial);
 			g.drawString("GAME OVER!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
-		}
-//		else
-//		{
-//			if(Squares[x][y]) //Not finished
-//			{
-//				g.setColor(Color.RED);
-//				Font arial = new Font("Arial", Font.BOLD, 20);
-//				g.setFont(arial);
-//				g.drawString("CONGRATULATIONS, YOU WIN!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
-//			}
-//		}
+	}
+	
+	public void win(Graphics g)
+	{
+			g.setColor(Color.GREEN);
+			g.drawString("YOU WIN!", GRID_X + INNER_CELL_SIZE+1 + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS-100)/2, GRID_Y + ((INNER_CELL_SIZE+1)*TOTAL_COLUMNS) + INNER_CELL_SIZE);
+			repaint();
 	}
 }	
